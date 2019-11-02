@@ -4,8 +4,11 @@ import Radar from '../Radar/Radar';
 import Point from '../Point/Point';
 import Converter from '../converter/Converter';
 import Tooltip from '../Tooltip/Tooltip';
+import { useSelector } from 'react-redux';
 
 const App = () => {
+  const data = useSelector(state => state.data);
+
   return (
     <Switch>
       <Route exact path={'/'}>
@@ -16,7 +19,9 @@ const App = () => {
           }}
         >
           <Radar>
-            {/*<Point x={100} y={200} radius={10} />*/}
+            {
+              data.map(data => <Point {...data} key={data.script} />)
+            }
           </Radar>
           <Converter />
           <Tooltip />

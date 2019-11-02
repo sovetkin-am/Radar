@@ -2,14 +2,13 @@ import { SET_TOOLTIP_STATE } from '../actions/tooltip';
 
 const initialState = {
   data: {
-    script: 'Автоматизированные системы обработки данных геологоразведки',
-    description:
-      'Использование мобильных рабочих мест для сотрудников, вовлеченных в процесс бурения',
-    technologyGroup: 'Самоходные роботы',
-    implementation: 'да',
-    solutionPotential: 'Высокий',
-    readyState: '7',
-    marketState: '9',
+    script: '',
+    description: '',
+    technologyGroup: '',
+    implementation: '',
+    solutionPotential: '',
+    readyState: '',
+    marketState: '',
   },
   position: {
     top: 0,

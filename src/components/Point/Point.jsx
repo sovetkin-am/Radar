@@ -5,19 +5,15 @@ import { setTooltipState } from '../../redux/actions/tooltip';
 const TOOLTIP_MARGIN_TOP = 15;
 const TOOLTIP_MARGIN_LEFT = 15;
 
-const HIGHT_RADIUS = 15;
-const MEDIUM_RADIUS = 10;
+const HIGHT_RADIUS = 10;
+const MEDIUM_RADIUS = 7;
 const LOW_RADIUS = 5;
 
 const Point = props => {
   const dispatch = useDispatch();
   const {
     script,
-    description,
-    technologyGroup,
-    implementation,
     solutionPotential,
-    readyState,
     marketState,
     domain,
   } = props;
@@ -61,24 +57,23 @@ const Point = props => {
   function getDegree(domain) {
     switch (domain.toLowerCase()) {
       case 'искусственный интеллект и аналитика':
-        return 5 + Math.random() * (40 - 5);
+        return 0 + Math.random() * 45;
       case 'ar/vr и естественные интерфейсы':
-        return 50 + Math.random() * (85 - 50);
+        return 45 + Math.random() * (90 - 45);
       case 'бвс':
-        return 90 + Math.random() * (130 - 90);
+        return 90 + Math.random() * (135 - 90);
       case 'роботы, автономная техника и аддитивные технологии':
-        return 140 + Math.random() * (175 - 140);
+        return 135 + Math.random() * (180 - 135);
       case 'промышленный интернет и цифровые двойники':
-        return 185 + Math.random() * (220 - 185);
+        return 180 + Math.random() * (225 - 180);
       case 'блокчейн':
-        return 230 + Math.random() * (230 - 265);
+        return 225 + Math.random() * (270 - 225);
       case 'средства коллаборации':
-        return 275 + Math.random() * (310 - 275);
+        return 270 + Math.random() * (315 - 270);
       case 'средства оптимизации процессов':
-        return 320 + Math.random() * (355 - 320);
+        return 270 + Math.random() * (360 - 270);
       default:
         console.error('Некорректный домен: ' + script + ', домен: ' + domain);
-        console.log(domain.toLowerCase());
 
         return Math.random() * 360;
     }
@@ -87,7 +82,17 @@ const Point = props => {
     // min (1 - минимальный УРЗ) + max (5 - максимальный УРЗ) - УРЗ = обратный УРЗ
     // 250 (радиус радара) / 5 (кол-во уровней рыночной зрелости) = 50
     // 3 (цвето-круга) / 5 (кол-во уровней рыночной зрелости) = 0.6
-    return (6 - marketState) * 50 * 0.6;
+    if (marketState === 5) {
+      return 10 + Math.random() * 55;
+    } else if (marketState === 4) {
+      return 65 + Math.random() * 65;
+    } else if (marketState === 3) {
+      return 130 + Math.random() * 35;
+    } else if (marketState === 2) {
+      return 165 + Math.random() * 35;
+    }
+
+    return 200 + Math.random() * 40;
   }
   function getPosition(degree, giphotenuse) {
     const tRad = (degree * Math.PI) / 180;
@@ -112,7 +117,7 @@ const Point = props => {
       fill="orange"
       onMouseMove={showTooltip}
       onMouseLeave={hideTooltip}
-      onClick={() => console.log(degree, position)}
+      onClick={() => console.log(degree, giphotenuse, position)}
     />
   );
 };

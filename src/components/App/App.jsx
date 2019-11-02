@@ -3,11 +3,12 @@ import { Route, Switch } from 'react-router';
 import Radar from '../Radar/Radar';
 import Point from '../Point/Point';
 import Converter from '../converter/Converter';
+import Tooltip from '../Tooltip/Tooltip';
 
 const App = () => {
   return (
     <Switch>
-      <Route exact path={"/"}>
+      <Route exact path={'/'}>
         <div
           style={{
             display: 'grid',
@@ -18,6 +19,7 @@ const App = () => {
             <Point x={100} y={200} radius={10} />
           </Radar>
           <Converter />
+          <Tooltip />
         </div>
       </Route>
       <Route>

@@ -1,0 +1,21 @@
+.tooltip {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto minmax(auto, 300px);
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 32, 51, 0.18), 0 2px 2px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  padding: 5px;
+  z-index: 1000;
+
+  &__label,
+  &__data {
+    font-size: 15px;
+    border-bottom: 2px solid #e9f5fd;
+    padding: 5px;
+  }
+
+  &__label {
+    font-weight: bold;
+  }
+}

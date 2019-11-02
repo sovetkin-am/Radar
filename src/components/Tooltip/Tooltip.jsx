@@ -10,8 +10,8 @@ const Tooltip = () => {
     <div
       className="tooltip"
       style={{
-      left: state.left,
-      top: state.top,
+      left: state.position.left,
+      top: state.position.top,
       display: state.isVisible ? 'grid' : 'none'
     }}>
       <div className="tooltip__label">Наименование сценария:</div>

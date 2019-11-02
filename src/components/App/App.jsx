@@ -16,7 +16,7 @@ const App = () => {
           }}
         >
           <Radar>
-            <Point x={100} y={200} radius={10} />
+            {/*<Point x={100} y={200} radius={10} />*/}
           </Radar>
           <Converter />
           <Tooltip />

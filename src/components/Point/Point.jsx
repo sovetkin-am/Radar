@@ -11,12 +11,7 @@ const LOW_RADIUS = 5;
 
 const Point = props => {
   const dispatch = useDispatch();
-  const {
-    script,
-    solutionPotential,
-    marketState,
-    domain,
-  } = props;
+  const { script, solutionPotential, marketState, domain } = props;
 
   const radius = getRadius(solutionPotential);
   const degree = getDegree(domain);
@@ -26,7 +21,7 @@ const Point = props => {
   const showTooltip = e => {
     const position = {
       top: e.pageY + TOOLTIP_MARGIN_TOP,
-      left: e.pageX + TOOLTIP_MARGIN_LEFT
+      left: e.pageX + TOOLTIP_MARGIN_LEFT,
     };
 
     window.requestAnimationFrame(() => {
@@ -57,21 +52,21 @@ const Point = props => {
   function getDegree(domain) {
     switch (domain.toLowerCase()) {
       case 'искусственный интеллект и аналитика':
-        return 0 + Math.random() * 45;
+        return Math.random() * 45;
       case 'ar/vr и естественные интерфейсы':
-        return 45 + Math.random() * (90 - 45);
+        return 45 + Math.random() * 45;
       case 'бвс':
-        return 90 + Math.random() * (135 - 90);
+        return 90 + Math.random() * 45;
       case 'роботы, автономная техника и аддитивные технологии':
-        return 135 + Math.random() * (180 - 135);
+        return 135 + Math.random() * 45;
       case 'промышленный интернет и цифровые двойники':
-        return 180 + Math.random() * (225 - 180);
+        return 180 + Math.random() * 45;
       case 'блокчейн':
-        return 225 + Math.random() * (270 - 225);
+        return 225 + Math.random() * 45;
       case 'средства коллаборации':
-        return 270 + Math.random() * (315 - 270);
+        return 270 + Math.random() * 45;
       case 'средства оптимизации процессов':
-        return 270 + Math.random() * (360 - 270);
+        return 315 + Math.random() * 45;
       default:
         console.error('Некорректный домен: ' + script + ', домен: ' + domain);
 
@@ -79,9 +74,14 @@ const Point = props => {
     }
   }
   function getGiphotenuse(marketState) {
-    // min (1 - минимальный УРЗ) + max (5 - максимальный УРЗ) - УРЗ = обратный УРЗ
-    // 250 (радиус радара) / 5 (кол-во уровней рыночной зрелости) = 50
-    // 3 (цвето-круга) / 5 (кол-во уровней рыночной зрелости) = 0.6
+    /*
+      Точки с marketState = 5, должны располагаться в первой половине первого круга
+      Точки с marketState = 4, должны располагаться во второй половине первого круга
+      Точки с marketState = 3, должны располагаться в первой половине второго круга
+      Точки с marketState = 2, должны располагаться во второй половине второго круга
+      Точки с marketState = 1, должны располагаться в третьем круге
+    */
+
     if (marketState === 5) {
       return 10 + Math.random() * 55;
     } else if (marketState === 4) {
@@ -97,7 +97,7 @@ const Point = props => {
   function getPosition(degree, giphotenuse) {
     const tRad = (degree * Math.PI) / 180;
     const tSin = Math.sin(tRad);
-    const top = 350 - (tSin * giphotenuse);
+    const top = 350 - tSin * giphotenuse;
 
     const lRad = ((90 - degree) * Math.PI) / 180;
     const lSin = Math.sin(lRad);
@@ -105,8 +105,8 @@ const Point = props => {
 
     return {
       top,
-      left
-    }
+      left,
+    };
   }
 
   return (

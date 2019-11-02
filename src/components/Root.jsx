@@ -1,20 +1,18 @@
 import React from 'react';
-import Radar from './Radar/Radar';
-import Point from './Point/Point';
-import Converter from './converter/Converter';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+
+import configureStore, { history } from '../redux/store';
+import App from './App/App';
+
+const store = configureStore();
 
 const Root = () => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    }}
-  >
-    <Radar>
-      <Point x={100} y={200} radius={10} />
-    </Radar>
-    <Converter/>
-  </div>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>
 );
 
 export default Root;

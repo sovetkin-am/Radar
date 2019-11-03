@@ -1,7 +1,7 @@
 import React from 'react';
 import XLSX from 'xlsx';
 import { useDispatch } from 'react-redux';
-import { setData } from '../../redux/actions/data';
+import { dataSet } from '../../redux/actions/data';
 
 const Converter = () => {
   const dispatch = useDispatch();
@@ -22,13 +22,13 @@ const Converter = () => {
         technologyGroup: dataItem['Подгруппа сценариев'],
         implementation: dataItem['Реализуется в Газпром нефти?'],
         solutionPotential: dataItem['Потенциал решения'],
-        readyState: dataItem['Потенциал решения'],
+        readyState: dataItem['Организационная готовность (1-7)'],
         marketState: dataItem['Рыночная зрелость (1-5)'],
         domain: dataItem['Домен'],
+        functionalGroup: dataItem['Функциональная группа']
       }));
 
-      dispatch(setData(data));
-      console.log(data);
+      dispatch(dataSet(data));
     };
 
     reader.onerror = function(event) {

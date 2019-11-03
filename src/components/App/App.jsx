@@ -1,10 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Radar from '../Radar/Radar';
-import Point from '../Point/Point';
 import Converter from '../converter/Converter';
 import Tooltip from '../Tooltip/Tooltip';
-import { useSelector } from 'react-redux';
 import MainPage from '../MainPage/MainPage';
 import AppMenu from '../AppMenu/AppMenu';
 

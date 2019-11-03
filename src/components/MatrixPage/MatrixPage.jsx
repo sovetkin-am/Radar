@@ -5,48 +5,53 @@ import { Radio, RadioGroup, Slider, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { dataFilterSet } from '../../redux/actions/data';
 import { useDispatch, useSelector } from 'react-redux';
+import Point from '../Point/Point';
 
 const DOMAINS = [
   {
     title: 'AR/VR и естественные интерфейсы',
-    value: 'ar/vr и естественные интерфейсы',
   },
   {
     title: 'БВС',
-    value: 'бвс',
   },
   {
     title: 'Блокчейн',
-    value: 'блокчейн',
   },
   {
-    title: 'искусственный интеллект и аналитика',
-    value: 'Искусственный интеллект и аналитика',
+    title: 'Искусственный интеллект и аналитика',
   },
   {
     title: 'Промышленный интернет и цифровые двойники',
-    value: 'промышленный интернет и цифровые двойники',
   },
   {
     title: 'Роботы, автономная техника и аддитивные технологии',
-    value: 'роботы, автономная техника и аддитивные технологии',
   },
   {
     title: 'Средства коллаборации',
-    value: 'средства коллаборации',
   },
   {
     title: 'Средства оптимизации процессов',
-    value: 'средства оптимизации процессов',
   },
 ];
 
 const MatrixPage = () => {
   const dispatch = useDispatch();
+  const data = useSelector(store => store.data.filteredData);
   const filter = useSelector(store => store.data.filter);
 
   const getChart = () => {
-    return <Matrix />;
+    return (
+      <Matrix>
+        {data.map(props => (
+          <Point
+            {...props}
+            key={props.script}
+            top={props.position.mTop}
+            left={props.position.mLeft}
+          />
+        ))}
+      </Matrix>
+    );
   };
 
   const setReadyState = (event, value) =>
@@ -55,8 +60,13 @@ const MatrixPage = () => {
     dispatch(dataFilterSet({ marketState: value }));
   const setFunctionalGroup = (event, value) =>
     dispatch(dataFilterSet({ functionalGroup: value }));
-  const setDomain = (event, value) =>
-    dispatch(dataFilterSet({ domain: value }));
+  const setDomain = (event, value) => {
+    if (!value) {
+      value = 'all';
+    }
+
+    dispatch(dataFilterSet({ domain: value.toLowerCase() }));
+  };
 
   const getMenu = () => {
     return (

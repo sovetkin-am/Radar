@@ -4,7 +4,7 @@ import {
   DATA_FILTER_SET,
   DATA_FILTER_RESET,
 } from '../actions/data';
-import getRadarPointData from '../../utils/getRadarPointData';
+import getPointData from '../../utils/getPointData';
 
 const initialState = {
   data: [],
@@ -24,7 +24,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case DATA_SET: {
-      const data = action.data.map(pointData => getRadarPointData(pointData));
+      const data = action.data.map(pointData => getPointData(pointData));
 
       return {
         ...state,
@@ -57,7 +57,7 @@ export default function(state = initialState, action) {
           const [marketStateMin, marketStateMax] = filter.marketState;
           if (
             marketStateMin > data.marketState ||
-            marketStateMax < data.readyState
+            marketStateMax < data.marketState
           ) {
             return false;
           }
@@ -93,7 +93,6 @@ export default function(state = initialState, action) {
       };
     }
     case DATA_FILTER_RESET:
-      console.log('filter reset');
       return {
         ...state,
         filter: initialState.filter,

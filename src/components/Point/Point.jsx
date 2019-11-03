@@ -9,7 +9,7 @@ const TOOLTIP_MARGIN_LEFT = 15;
 const Point = props => {
   const dispatch = useDispatch();
   const [isHover, setHover] = useState(false);
-  const {radius, position, fill} = props;
+  const {radius, fill, left, top} = props;
 
   const showTooltip = e => {
     const position = {
@@ -35,8 +35,8 @@ const Point = props => {
     return ReactDOM.createPortal(
       <circle
         r={radius}
-        cx={position.left}
-        cy={position.top}
+        cx={left}
+        cy={top}
         fill={fill}
         onMouseMove={showTooltip}
         onTouchStart={showTooltip}
@@ -44,15 +44,15 @@ const Point = props => {
         onTouchEnd={hideTooltip}
         stroke="white"
       />,
-      document.getElementById('radar')
+      document.getElementById('chart')
     )
   }
 
   return (
     <circle
       r={radius}
-      cx={position.left}
-      cy={position.top}
+      cx={left}
+      cy={top}
       fill={fill}
       onMouseEnter={() => setHover(true)}
       onTouchStart={() => setHover(true)}

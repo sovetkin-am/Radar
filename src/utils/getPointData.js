@@ -2,19 +2,20 @@ const HIGHT_RADIUS = 10;
 const MEDIUM_RADIUS = 7;
 const LOW_RADIUS = 5;
 
-export default function getRadarPointData(props) {
+export default function getPointData(props) {
   const {
     solutionPotential,
     script,
     domain,
     marketState,
+    readyState,
     implementation,
   } = props;
 
   const radius = getRadius(solutionPotential, script);
   const degree = getDegree(domain, script);
   const giphotenuse = getGiphotenuse(marketState);
-  const position = getPosition(degree, giphotenuse);
+  const position = getPosition(degree, giphotenuse, marketState, readyState);
   const fill = implementation.toLowerCase() === 'да' ? '#0670B8' : '#FF952E';
 
   return {
@@ -84,17 +85,22 @@ function getGiphotenuse(marketState) {
 
   return 200 + Math.random() * 40;
 }
-function getPosition(degree, giphotenuse) {
+function getPosition(degree, giphotenuse, marketState, readyState) {
   const tRad = (degree * Math.PI) / 180;
   const tSin = Math.sin(tRad);
-  const top = 350 - tSin * giphotenuse;
+  const rTop = 350 - tSin * giphotenuse;
 
   const lRad = ((90 - degree) * Math.PI) / 180;
   const lSin = Math.sin(lRad);
-  const left = lSin * giphotenuse + 350;
+  const rLeft = lSin * giphotenuse + 350;
+
+  const mTop = 140 * (6 - marketState) - 80 + Math.random() * 50;
+  const mLeft = 100 * readyState + 25 + Math.random() * 50;
 
   return {
-    top,
-    left,
+    rTop,
+    rLeft,
+    mTop,
+    mLeft,
   };
 }

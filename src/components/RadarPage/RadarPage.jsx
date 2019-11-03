@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import Radar from '../Radar/Radar';
 import Point from '../Point/Point';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,14 @@ const RadarPage = () => {
 
   const getChart = () => (
     <Radar>
-      {data.filteredData.map(props => <Point {...props} key={props.script}/>)}
+      {data.filteredData.map(props => (
+        <Point
+          {...props}
+          key={props.script}
+          left={props.position.rLeft}
+          top={props.position.rTop}
+        />
+      ))}
     </Radar>
   );
 
@@ -86,7 +93,6 @@ const RadarPage = () => {
             <Checkbox
               style={{ color: '#0670B8' }}
               onChange={setGPNImplementation}
-
               checked={filter.implementation.gpn}
             />
             Да

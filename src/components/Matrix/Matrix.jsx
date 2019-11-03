@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Matrix = () => {
+const Matrix = props => {
   return (
     <div>
       <svg version="1.1"
            xmlns="http://www.w3.org/2000/svg"
            className="radar__wrapper"
            viewBox="0 0 750 770"
-           id="matrix">
+           id="chart">
         <line x1="40" y1="40" x2="40" y2="740" stroke="black"/>
         <line x1="40" y1="740" x2="740" y2="740" stroke="black"/>
         <polyline points="30,55 40,40 50,55" stroke="black" fill="none"/>
@@ -44,24 +44,25 @@ const Matrix = () => {
         <text x="120" y="765" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="93">
           1234567
         </text>
-        <text x="20" y="765" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="93">
+        <text x="20" y="765" fontSize="12" fill="#006FBA" fontWeight="bold">
           0
         </text>
-        <text x="20" y="615" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="83">
+        <text x="20" y="625" fontSize="12" fill="#006FBA" fontWeight="bold">
           1
         </text>
-        <text x="20" y="475" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="83">
+        <text x="20" y="485" fontSize="12" fill="#006FBA" fontWeight="bold">
           2
         </text>
-        <text x="20" y="335" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="83">
+        <text x="20" y="345" fontSize="12" fill="#006FBA" fontWeight="bold">
           3
         </text>
-        <text x="20" y="195" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="83">
+        <text x="20" y="205" fontSize="12" fill="#006FBA" fontWeight="bold">
           4
         </text>
-        <text x="18" y="55" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="83">
+        <text x="18" y="65" fontSize="12" fill="#006FBA" fontWeight="bold">
           5
         </text>
+        {props.children}
       </svg>
     </div>
   )

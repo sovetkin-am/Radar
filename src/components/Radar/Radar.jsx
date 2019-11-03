@@ -10,7 +10,7 @@ const Radar = props => {
         xmlns="http://www.w3.org/2000/svg"
         className="radar__wrapper"
         viewBox="0 0 700 700"
-        id="radar"
+        id="chart"
       >
         <circle cx="350" cy="350" r="250" fill="#d5f0fb" />
         <circle cx="350" cy="350" r="200" fill="#ace1f6" />

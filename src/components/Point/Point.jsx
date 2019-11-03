@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { setTooltipState } from '../../redux/actions/tooltip';
 
@@ -18,6 +19,7 @@ const Point = props => {
     domain,
     implementation,
   } = props;
+  const [isHover, setHover] = useState(false);
 
   const radius = useMemo(() => getRadius(solutionPotential), [solutionPotential]);
   const degree = useMemo(() => getDegree(domain), [domain]);
@@ -36,8 +38,8 @@ const Point = props => {
     });
   };
 
-  const hideTooltip = (e) => {
-    e.target.stroke = 'none';
+  const hideTooltip = () => {
+    setHover(false);
 
     window.requestAnimationFrame(() => {
       dispatch(setTooltipState({ isVisible: false }));
@@ -118,14 +120,29 @@ const Point = props => {
     };
   }
 
+  if (isHover) {
+    // TODO: прокинуть рефом
+    return ReactDOM.createPortal(
+      <circle
+        r={radius}
+        cx={position.left}
+        cy={position.top}
+        fill={fill}
+        onMouseMove={showTooltip}
+        onMouseLeave={hideTooltip}
+        stroke="white"
+      />,
+      document.getElementById('radar')
+    )
+  }
+
   return (
     <circle
       r={radius}
       cx={position.left}
       cy={position.top}
       fill={fill}
-      onMouseMove={showTooltip}
-      onMouseLeave={hideTooltip}
+      onMouseEnter={() => setHover(true)}
     />
   );
 };

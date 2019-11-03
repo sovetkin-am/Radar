@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { setTooltipState } from '../../redux/actions/tooltip';
 
@@ -11,12 +11,19 @@ const LOW_RADIUS = 5;
 
 const Point = props => {
   const dispatch = useDispatch();
-  const { script, solutionPotential, marketState, domain } = props;
+  const {
+    script,
+    solutionPotential,
+    marketState,
+    domain,
+    implementation,
+  } = props;
 
-  const radius = getRadius(solutionPotential);
-  const degree = getDegree(domain);
-  const giphotenuse = getGiphotenuse(marketState);
+  const radius = useMemo(() => getRadius(solutionPotential), [solutionPotential]);
+  const degree = useMemo(() => getDegree(domain), [domain]);
+  const giphotenuse = useMemo(() => getGiphotenuse(marketState), [marketState]);
   const position = getPosition(degree, giphotenuse);
+  const fill = implementation.toLowerCase() === 'да' ? '#0670B8' : '#FF952E';
 
   const showTooltip = e => {
     const position = {
@@ -29,10 +36,12 @@ const Point = props => {
     });
   };
 
-  const hideTooltip = () => {
-    window.requestAnimationFrame(() =>
-      dispatch(setTooltipState({ isVisible: false }))
-    );
+  const hideTooltip = (e) => {
+    e.target.stroke = 'none';
+
+    window.requestAnimationFrame(() => {
+      dispatch(setTooltipState({ isVisible: false }));
+    });
   };
 
   function getRadius(solutionPotential) {
@@ -114,12 +123,11 @@ const Point = props => {
       r={radius}
       cx={position.left}
       cy={position.top}
-      fill="orange"
+      fill={fill}
       onMouseMove={showTooltip}
       onMouseLeave={hideTooltip}
-      onClick={() => console.log(degree, giphotenuse, position)}
     />
   );
 };
 
-export default Point;
+export default React.memo(Point);

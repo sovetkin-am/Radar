@@ -3,41 +3,46 @@ import React from 'react';
 import './AppMenu.scss';
 import { Link } from 'react-router-dom';
 import XLSX from 'xlsx';
-import { dataSet } from '../../redux/actions/data';
+import { dataRemove, dataSet } from '../../redux/actions/data';
 import { useDispatch } from 'react-redux';
 
 const AppMenu = () => {
   const dispatch = useDispatch()
   const convertFile = event => {
-    const selectedFile = event.target.files[0];
-    const reader = new FileReader();
+    dispatch(dataRemove());
+    try {
+      const selectedFile = event.target.files[0];
+      const reader = new FileReader();
 
-    reader.onload = function(event) {
-      const result = event.target.result;
-      const workbook = XLSX.read(result, {
-        type: 'binary'
-      });
+      reader.onload = function(event) {
+        const result = event.target.result;
+        const workbook = XLSX.read(result, {
+          type: 'binary'
+        });
 
-      const data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]).map(dataItem => ({
-        script: dataItem['Наименование сценария'],
-        description: dataItem['Описание'] || 'Тут должно быть описание, но в Excel его нет',
-        technologyGroup: dataItem['Подгруппа сценариев'],
-        implementation: dataItem['Реализуется в Газпром нефти?'],
-        solutionPotential: dataItem['Потенциал решения'],
-        readyState: dataItem['Организационная готовность (1-7)'],
-        marketState: dataItem['Рыночная зрелость (1-5)'],
-        domain: dataItem['Домен'],
-        functionalGroup: dataItem['Функциональная группа']
-      }));
+        const data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]).map(dataItem => ({
+          script: dataItem['Наименование сценария'],
+          description: dataItem['Описание'] || 'Тут должно быть описание, но в Excel его нет',
+          technologyGroup: dataItem['Подгруппа сценариев'],
+          implementation: dataItem['Реализуется в Газпром нефти?'],
+          solutionPotential: dataItem['Потенциал решения'],
+          readyState: dataItem['Организационная готовность (1-7)'],
+          marketState: dataItem['Рыночная зрелость (1-5)'],
+          domain: dataItem['Домен'],
+          functionalGroup: dataItem['Функциональная группа']
+        }));
 
-      dispatch(dataSet(data));
-    };
+        dispatch(dataSet(data));
+      };
 
-    reader.onerror = function(event) {
-      console.error("File could not be read! Code " + event.target.error.code);
-    };
+      reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+      };
 
-    reader.readAsBinaryString(selectedFile);
+      reader.readAsBinaryString(selectedFile);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -20,10 +20,15 @@
   }
 
   &__link {
+    cursor: pointer;
     display: inline-block;
     color: black;
     text-decoration: none;
     padding: 20px 15px 15px 15px;
+
+    &:focus {
+      outline: 3px solid rgba(37, 133, 245, .5);
+    }
   }
 
   &__link:hover {

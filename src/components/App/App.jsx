@@ -1,14 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import Converter from '../converter/Converter';
 import Tooltip from '../Tooltip/Tooltip';
-import MainPage from '../MainPage/MainPage';
 import AppMenu from '../AppMenu/AppMenu';
 
 import './App.scss';
+import { useDispatch } from 'react-redux';
 import RadarPage from '../RadarPage/RadarPage';
 
 const App = () => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="app">
@@ -17,7 +20,7 @@ const App = () => {
         </div>
         <Switch>
           <Route exact path={'/'}>
-            <MainPage />
+            { dispatch(push('/radar')) }
           </Route>
           <Route exact path={'/radar'}>
             <RadarPage />

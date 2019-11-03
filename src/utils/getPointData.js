@@ -2,6 +2,9 @@ const HIGHT_RADIUS = 10;
 const MEDIUM_RADIUS = 7;
 const LOW_RADIUS = 5;
 
+const BLUE = 'rgba(6, 112, 184, 0.6)';
+const ORANGE = 'rgba(255, 149, 46, 0.6)';
+
 export default function getPointData(props) {
   const {
     solutionPotential,
@@ -16,7 +19,7 @@ export default function getPointData(props) {
   const degree = getDegree(domain, script);
   const giphotenuse = getGiphotenuse(marketState);
   const position = getPosition(degree, giphotenuse, marketState, readyState);
-  const fill = implementation.toLowerCase() === 'да' ? '#0670B8' : '#FF952E';
+  const fill = implementation.toLowerCase() === 'да' ? BLUE : ORANGE;
 
   return {
     ...props,

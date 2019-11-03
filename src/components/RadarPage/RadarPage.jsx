@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Radar from '../Radar/Radar';
 import Point from '../Point/Point';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,12 +13,33 @@ const RadarPage = () => {
   const data = useSelector(store => store.data);
   const filter = useSelector(store => store.data.filter);
 
+  // TODO: вставить сброс ховера по выходу с графика
+  const [hoverId, setHoverId] = useState('');
+
+  const hoverCallback = useMemo(() => {
+    // TODO: вставить debounce
+    return (event) => {
+
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+
+      setHoverId(event && event.currentTarget ? event.currentTarget.getAttribute('number') : '');
+      return false;
+
+    }
+  },[]);
+
   const getChart = () => (
     <Radar>
       {data.filteredData.map(props => (
         <Point
           {...props}
+          isHover={props.script === hoverId}
+          onHover={hoverCallback}
           key={props.script}
+          number={props.script}
           left={props.position.rLeft}
           top={props.position.rTop}
         />
@@ -51,6 +72,8 @@ const RadarPage = () => {
   const setFunctionalGroup = (event, value) =>
     dispatch(dataFilterSet({ functionalGroup: value }));
 
+
+  // TODO: вынеси в отдельный компонент + memo
   const getMenu = () => {
     return (
       <>

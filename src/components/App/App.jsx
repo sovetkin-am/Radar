@@ -8,6 +8,7 @@ import AppMenu from '../AppMenu/AppMenu';
 import './App.scss';
 import { useDispatch } from 'react-redux';
 import RadarPage from '../RadarPage/RadarPage';
+import MatrixPage from '../MatrixPage/MatrixPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const App = () => {
           <Route exact path={'/radar'}>
             <RadarPage />
           </Route>
-          <Route exact path={'/upload'}>
-            <Converter/>
+          <Route exact path={'/matrix'}>
+            <MatrixPage />
           </Route>
           <Route>
             <h1>Page not found</h1>

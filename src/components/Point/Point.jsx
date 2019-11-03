@@ -39,7 +39,9 @@ const Point = props => {
         cy={position.top}
         fill={fill}
         onMouseMove={showTooltip}
+        onTouchStart={showTooltip}
         onMouseLeave={hideTooltip}
+        onTouchEnd={hideTooltip}
         stroke="white"
       />,
       document.getElementById('radar')
@@ -53,6 +55,7 @@ const Point = props => {
       cy={position.top}
       fill={fill}
       onMouseEnter={() => setHover(true)}
+      onTouchStart={() => setHover(true)}
     />
   );
 };

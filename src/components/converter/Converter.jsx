@@ -18,7 +18,7 @@ const Converter = () => {
 
       const data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]).map(dataItem => ({
         script: dataItem['Наименование сценария'],
-        description: 'Тут должно быть описание, но в Excel его нет',
+        description: dataItem['Описание'] || 'Тут должно быть описание, но в Excel его нет',
         technologyGroup: dataItem['Подгруппа сценариев'],
         implementation: dataItem['Реализуется в Газпром нефти?'],
         solutionPotential: dataItem['Потенциал решения'],

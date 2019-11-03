@@ -79,7 +79,7 @@ const RadarPage = () => {
           </div>
         </div>
         <div className="data__section">
-          <div className="data__label">Реализуется в ГПН:</div>
+          <div className="data__label">«Газпром нефть»</div>
           <label className="data__checkbox-label">
             <Checkbox
               style={{ color: '#0670B8' }}
@@ -117,12 +117,12 @@ const RadarPage = () => {
             </label>
             <label className="data__checkbox-label" htmlFor="radio-brsp">
               <Radio
-                value={'бршп'}
+                value={'добыча на шельфе'}
                 style={{ color: '#0670B8' }}
                 color="primary"
                 id="radio-brsp"
               />
-              БРШП
+              Добыча на шельфе
             </label>
             <label className="data__checkbox-label" htmlFor="radio-drilling">
               <Radio

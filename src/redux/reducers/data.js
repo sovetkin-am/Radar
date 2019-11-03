@@ -17,6 +17,7 @@ const initialState = {
       outsourcing: true,
     },
     functionalGroup: 'all',
+    domain: 'all',
   },
 };
 
@@ -80,11 +81,19 @@ export default function(state = initialState, action) {
             return false;
           }
 
+          if (
+            filter.domain !== 'all' &&
+            filter.domain !== data.domain.toLowerCase()
+          ) {
+            return false;
+          }
+
           return true;
         }),
       };
     }
     case DATA_FILTER_RESET:
+      console.log('filter reset');
       return {
         ...state,
         filter: initialState.filter,

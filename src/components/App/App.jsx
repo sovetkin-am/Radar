@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(dataFilterReset());
-  }, [location]);
+  }, [location, dispatch]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import Radar from '../Radar/Radar';
 import Point from '../Point/Point';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,12 +53,13 @@ const RadarPage = () => {
           <div className="data__range">
             <Slider
               defaultValue={filter.readyState}
+              value={filter.readyState}
               valueLabelDisplay="auto"
               step={1}
               marks
               min={1}
               max={7}
-              onChangeCommitted={setReadyState}
+              onChange={setReadyState}
               style={{ color: '#006FBA' }}
             />
           </div>
@@ -68,12 +69,13 @@ const RadarPage = () => {
           <div className="data__range">
             <Slider
               defaultValue={filter.marketState}
+              value={filter.marketState}
               valueLabelDisplay="auto"
               step={1}
               marks
               min={1}
               max={5}
-              onChangeCommitted={setMarketState}
+              onChange={setMarketState}
               style={{ color: '#006FBA' }}
             />
           </div>

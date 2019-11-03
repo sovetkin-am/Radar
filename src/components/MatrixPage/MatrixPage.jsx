@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Page from '../Page/Page';
 import Matrix from '../Matrix/Matrix';
 import { Radio, RadioGroup, Slider, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { dataFilterReset, dataFilterSet } from '../../redux/actions/data';
+import { dataFilterSet } from '../../redux/actions/data';
 import { useDispatch, useSelector } from 'react-redux';
 
 const DOMAINS = [
@@ -43,7 +43,6 @@ const DOMAINS = [
 
 const MatrixPage = () => {
   const dispatch = useDispatch();
-  const data = useSelector(store => store.data);
   const filter = useSelector(store => store.data.filter);
 
   const getChart = () => {
@@ -68,12 +67,13 @@ const MatrixPage = () => {
           <div className="data__range">
             <Slider
               defaultValue={filter.readyState}
+              value={filter.readyState}
               valueLabelDisplay="auto"
               step={1}
               marks
               min={1}
               max={7}
-              onChangeCommitted={setReadyState}
+              onChange={setReadyState}
               style={{ color: '#006FBA' }}
             />
           </div>
@@ -83,12 +83,13 @@ const MatrixPage = () => {
           <div className="data__range">
             <Slider
               defaultValue={filter.marketState}
+              value={filter.marketState}
               valueLabelDisplay="auto"
               step={1}
               marks
               min={1}
               max={5}
-              onChangeCommitted={setMarketState}
+              onChange={setMarketState}
               style={{ color: '#006FBA' }}
             />
           </div>

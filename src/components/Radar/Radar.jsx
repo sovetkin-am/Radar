@@ -42,22 +42,22 @@ const Radar = props => {
         />
         <line
           x1="350"
-          y1="0"
+          y1="103"
           x2="350"
-          y2="700"
+          y2="597"
           stroke="white"
           strokeWidth="2"
         />
         <line
-          x1="0"
+          x1="103"
           y1="350"
-          x2="700"
+          x2="597"
           y2="350"
           stroke="white"
           strokeWidth="2"
         />
-        <line x1="0" y1="0" x2="700" y2="700" stroke="white" strokeWidth="2" />
-        <line x1="700" y1="0" x2="0" y2="700" stroke="white" strokeWidth="2" />
+        <line x1="175" y1="175" x2="525" y2="525" stroke="white" strokeWidth="2" />
+        <line x1="525" y1="175" x2="175" y2="525" stroke="white" strokeWidth="2" />
         <text x="0" y="250" fontSize="12" fill="#006FBA" fontWeight="bold">
           Роботы,
         </text>

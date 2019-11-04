@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { setTooltipState } from '../../redux/actions/tooltip';
@@ -8,8 +8,8 @@ const TOOLTIP_MARGIN_LEFT = 15;
 
 const Point = props => {
   const dispatch = useDispatch();
-  const [isHover, setHover] = useState(false);
-  const {radius, fill, left, top} = props;
+  const {isHover, onHover: setHover} = props;
+  const {radius, fill, left, top, number} = props;
 
   const showTooltip = e => {
     const position = {
@@ -23,7 +23,7 @@ const Point = props => {
   };
 
   const hideTooltip = () => {
-    setHover(false);
+    setHover(undefined);
 
     window.requestAnimationFrame(() => {
       dispatch(setTooltipState({ isVisible: false }));
@@ -34,6 +34,7 @@ const Point = props => {
     // TODO: прокинуть рефом
     return ReactDOM.createPortal(
       <circle
+        number={number}
         r={radius}
         cx={left}
         cy={top}
@@ -50,12 +51,13 @@ const Point = props => {
 
   return (
     <circle
+      number={number}
       r={radius}
       cx={left}
       cy={top}
       fill={fill}
-      onMouseEnter={() => setHover(true)}
-      onTouchStart={() => setHover(true)}
+      onMouseEnter={setHover}
+      onTouchStart={setHover}
     />
   );
 };

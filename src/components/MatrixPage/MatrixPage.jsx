@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Page from '../Page/Page';
 import Matrix from '../Matrix/Matrix';
 import { Radio, RadioGroup, Slider, TextField } from '@material-ui/core';
@@ -39,12 +39,33 @@ const MatrixPage = () => {
   const data = useSelector(store => store.data.filteredData);
   const filter = useSelector(store => store.data.filter);
 
+  // TODO: вставить сброс ховера по выходу с графика
+  const [hoverId, setHoverId] = useState('');
+
+  const hoverCallback = useMemo(() => {
+    // TODO: вставить debounce
+    return (event) => {
+
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+
+      setHoverId(event && event.currentTarget ? event.currentTarget.getAttribute('number') : '');
+      return false;
+
+    }
+  },[]);
+
   const getChart = () => {
     return (
       <Matrix>
         {data.map(props => (
           <Point
             {...props}
+            isHover={props.script === hoverId}
+            onHover={hoverCallback}
+            number={props.script}
             key={props.script}
             top={props.position.mTop}
             left={props.position.mLeft}

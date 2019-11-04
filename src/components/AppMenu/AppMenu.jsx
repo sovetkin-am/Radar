@@ -47,7 +47,7 @@ const AppMenu = () => {
 
   return (
     <nav className="app-menu">
-      <div className="app-menu__logo">Название сервиса</div>
+      <div className="app-menu__logo">Радар ЦТВ</div>
       <ul className="app-menu__list">
         <li className="app-menu__list-item">
           <input type="file" id="file" className="data__file" onChange={convertFile} />

@@ -46,21 +46,21 @@ function getRadius(solutionPotential, script) {
 function getDegree(domain, script) {
   switch (domain.toLowerCase()) {
     case 'искусственный интеллект и аналитика':
-      return Math.random() * 45;
+      return 5 + Math.random() * 40;
     case 'ar/vr и естественные интерфейсы':
-      return 45 + Math.random() * 45;
+      return 50 + Math.random() * 40;
     case 'бвс':
-      return 90 + Math.random() * 45;
+      return 95 + Math.random() * 40;
     case 'роботы, автономная техника и аддитивные технологии':
-      return 135 + Math.random() * 45;
+      return 130 + Math.random() * 40;
     case 'промышленный интернет и цифровые двойники':
-      return 180 + Math.random() * 45;
+      return 185 + Math.random() * 40;
     case 'блокчейн':
-      return 225 + Math.random() * 45;
+      return 230 + Math.random() * 40;
     case 'средства коллаборации':
-      return 270 + Math.random() * 45;
+      return 275 + Math.random() * 40;
     case 'средства оптимизации процессов':
-      return 315 + Math.random() * 45;
+      return 320 + Math.random() * 40;
     default:
       console.error('Некорректный домен: ' + script + ', домен: ' + domain);
 
@@ -97,11 +97,8 @@ function getPosition(degree, giphotenuse, marketState, readyState) {
   const lSin = Math.sin(lRad);
   const rLeft = lSin * giphotenuse + 350;
 
-  const mTop = 140 * (6 - marketState) - 80 + Math.random() * 50;
-  let mLeft = 100 * readyState + 25 + Math.random() * 50;
-  if (readyState < 7) {
-    mLeft += Math.random() * 50;
-  }
+  const mTop = 140 * (6 - marketState) - 55 + Math.random() * 50;
+  const mLeft = 100 * readyState + Math.random() * 50;
 
   return {
     rTop,

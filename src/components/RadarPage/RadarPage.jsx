@@ -55,7 +55,9 @@ const RadarPage = () => {
           title={'Радар применения цифровых технологий'}
           readyState
           marketState
+          implementation
           functionalGroup
+          domain
         />
       }
     />

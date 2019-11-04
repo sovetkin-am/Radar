@@ -7,6 +7,7 @@ import {
   Radio,
   RadioGroup,
   Slider,
+  Checkbox,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +19,24 @@ const Filter = props => {
     dispatch(dataFilterSet({ readyState: value }));
   const setMarketState = (event, value) =>
     dispatch(dataFilterSet({ marketState: value }));
+  const setGPNImplementation = event =>
+    dispatch(
+      dataFilterSet({
+        implementation: {
+          gpn: event.target.checked,
+          outsourcing: filter.implementation.outsourcing,
+        },
+      })
+    );
+  const setOutsorcingImplementation = event =>
+    dispatch(
+      dataFilterSet({
+        implementation: {
+          gpn: filter.implementation.gpn,
+          outsourcing: event.target.checked,
+        },
+      })
+    );
   const setFunctionalGroup = (event, value) =>
     dispatch(dataFilterSet({ functionalGroup: value }));
   const setDomain = (event, value) =>
@@ -62,6 +81,27 @@ const Filter = props => {
           </div>
         </div>
       )}
+      {props.implementation && (
+        <div className="data__section">
+          <div className="data__label">«Газпром нефть»</div>
+          <label className="data__checkbox-label">
+            <Checkbox
+              style={{ color: '#0670B8' }}
+              onChange={setGPNImplementation}
+              checked={filter.implementation.gpn}
+            />
+            Да
+          </label>
+          <label className="data__checkbox-label">
+            <Checkbox
+              style={{ color: '#FF952E' }}
+              onChange={setOutsorcingImplementation}
+              checked={filter.implementation.outsourcing}
+            />
+            Нет
+          </label>
+        </div>
+      )}
       <div className="data__section">
         {props.functionalGroup && (
           <ExpansionPanel>
@@ -80,7 +120,14 @@ const Filter = props => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <div className="data__label">Функциональная группа:</div>
+              <div className="data__label data__label_flex-column">
+                <span className="data__sub-label">Функциональная группа:</span>
+                <span className="data__sub-label-content">
+                  {filter.functionalGroup === 'all'
+                    ? 'показать все'
+                    : filter.functionalGroup}
+                </span>
+              </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <div className="data__section">
@@ -90,7 +137,7 @@ const Filter = props => {
                   onChange={setFunctionalGroup}
                   value={filter.functionalGroup}
                 >
-                  <label className="data__checkbox-label" htmlFor="radio-all">
+                  <label className="data__radio-label" htmlFor="radio-all">
                     <Radio
                       value={'all'}
                       style={{ color: '#0670B8' }}
@@ -99,7 +146,7 @@ const Filter = props => {
                     />
                     Показать все
                   </label>
-                  <label className="data__checkbox-label" htmlFor="radio-brsp">
+                  <label className="data__radio-label" htmlFor="radio-brsp">
                     <Radio
                       value={'добыча на шельфе'}
                       style={{ color: '#0670B8' }}
@@ -108,10 +155,7 @@ const Filter = props => {
                     />
                     Добыча на шельфе
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="radio-drilling"
-                  >
+                  <label className="data__radio-label" htmlFor="radio-drilling">
                     <Radio
                       value={'бурение'}
                       style={{ color: '#0670B8' }}
@@ -120,7 +164,7 @@ const Filter = props => {
                     />
                     Бурение
                   </label>
-                  <label className="data__checkbox-label" htmlFor="radio-gas">
+                  <label className="data__radio-label" htmlFor="radio-gas">
                     <Radio
                       value={'газ'}
                       style={{ color: '#0670B8' }}
@@ -130,7 +174,7 @@ const Filter = props => {
                     Газ
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="radio-production"
                   >
                     <Radio
@@ -141,10 +185,7 @@ const Filter = props => {
                     />
                     Добыча
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="radio-purchase"
-                  >
+                  <label className="data__radio-label" htmlFor="radio-purchase">
                     <Radio
                       value={'закупки и снабжение'}
                       style={{ color: '#0670B8' }}
@@ -153,10 +194,7 @@ const Filter = props => {
                     />
                     Закупки и снабжение
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="radio-building"
-                  >
+                  <label className="data__radio-label" htmlFor="radio-building">
                     <Radio
                       value={'капстрой'}
                       style={{ color: '#0670B8' }}
@@ -165,7 +203,7 @@ const Filter = props => {
                     />
                     Капстрой
                   </label>
-                  <label className="data__checkbox-label" htmlFor="radio-cd">
+                  <label className="data__radio-label" htmlFor="radio-cd">
                     <Radio
                       value={'кд'}
                       style={{ color: '#0670B8' }}
@@ -175,7 +213,7 @@ const Filter = props => {
                     КД
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="radio-corporate"
                   >
                     <Radio
@@ -187,7 +225,7 @@ const Filter = props => {
                     Корпоративные функции
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="radio-logistics"
                   >
                     <Radio
@@ -199,7 +237,7 @@ const Filter = props => {
                     Логистика
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="radio-processing"
                   >
                     <Radio
@@ -210,10 +248,7 @@ const Filter = props => {
                     />
                     Переработка
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="radio-security"
-                  >
+                  <label className="data__radio-label" htmlFor="radio-security">
                     <Radio
                       value={'промышленная безопасность'}
                       style={{ color: '#0670B8' }}
@@ -222,10 +257,7 @@ const Filter = props => {
                     />
                     Промышленная безопасность
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="radio-scouting"
-                  >
+                  <label className="data__radio-label" htmlFor="radio-scouting">
                     <Radio
                       value={'разведка'}
                       style={{ color: '#0670B8' }}
@@ -256,7 +288,12 @@ const Filter = props => {
               aria-controls="panel2a-content"
               id="panel2a-header"
             >
-              <div className="data__label">Домен:</div>
+              <div className="data__label data__label_flex-column">
+                <span className="data__sub-label">Домен:</span>
+                <span className="data__sub-label-content">
+                  {filter.domain === 'all' ? 'показать все' : filter.domain}
+                </span>
+              </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <div className="data__section">
@@ -266,7 +303,7 @@ const Filter = props => {
                   onChange={setDomain}
                   value={filter.domain}
                 >
-                  <label className="data__checkbox-label" htmlFor="domain-all">
+                  <label className="data__radio-label" htmlFor="domain-all">
                     <Radio
                       value={'all'}
                       style={{ color: '#0670B8' }}
@@ -275,7 +312,7 @@ const Filter = props => {
                     />
                     Показать все
                   </label>
-                  <label className="data__checkbox-label" htmlFor="domain-arvr">
+                  <label className="data__radio-label" htmlFor="domain-arvr">
                     <Radio
                       value={'ar/vr и естественные интерфейсы'}
                       style={{ color: '#0670B8' }}
@@ -284,7 +321,7 @@ const Filter = props => {
                     />
                     AR/VR и естественные интерфейсы
                   </label>
-                  <label className="data__checkbox-label" htmlFor="domain-bvc">
+                  <label className="data__radio-label" htmlFor="domain-bvc">
                     <Radio
                       value={'бвс'}
                       style={{ color: '#0670B8' }}
@@ -294,7 +331,7 @@ const Filter = props => {
                     БВС
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="domain-blockchain"
                   >
                     <Radio
@@ -305,7 +342,7 @@ const Filter = props => {
                     />
                     Блокчейн
                   </label>
-                  <label className="data__checkbox-label" htmlFor="domain-ai">
+                  <label className="data__radio-label" htmlFor="domain-ai">
                     <Radio
                       value={'искусственный интеллект и аналитика'}
                       style={{ color: '#0670B8' }}
@@ -315,7 +352,7 @@ const Filter = props => {
                     Искусственный интеллект и аналитика
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="domain-internet"
                   >
                     <Radio
@@ -326,10 +363,7 @@ const Filter = props => {
                     />
                     Промышленный интернет и цифровые двойники
                   </label>
-                  <label
-                    className="data__checkbox-label"
-                    htmlFor="domain-robots"
-                  >
+                  <label className="data__radio-label" htmlFor="domain-robots">
                     <Radio
                       value={
                         'роботы, автономная техника и аддитивные технологии'
@@ -341,7 +375,7 @@ const Filter = props => {
                     Роботы, автономная техника и аддитивные технологии
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="domain-collaborations"
                   >
                     <Radio
@@ -353,7 +387,7 @@ const Filter = props => {
                     Средства коллаборации
                   </label>
                   <label
-                    className="data__checkbox-label"
+                    className="data__radio-label"
                     htmlFor="domain-optimizing"
                   >
                     <Radio

@@ -4,10 +4,11 @@ import './AppMenu.scss';
 import { Link } from 'react-router-dom';
 import XLSX from 'xlsx';
 import { dataRemove, dataSet } from '../../redux/actions/data';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AppMenu = () => {
   const dispatch = useDispatch();
+  const location = useSelector(store => store.router.location.pathname);
 
   const convertFile = event => {
     dispatch(dataRemove());
@@ -84,12 +85,20 @@ const AppMenu = () => {
             Загрузить файл
           </label>
         </li>
-        <li className="app-menu__list-item">
+        <li
+          className={`app-menu__list-item ${
+            location === '/radar' ? 'app-menu__list-item_active' : ''
+          }`}
+        >
           <Link className="app-menu__link" to={'/radar'}>
             Радар
           </Link>
         </li>
-        <li className="app-menu__list-item">
+        <li
+          className={`app-menu__list-item ${
+            location === '/matrix' ? 'app-menu__list-item_active' : ''
+          }`}
+        >
           <Link className="app-menu__link" to={'/matrix'}>
             Матрица
           </Link>

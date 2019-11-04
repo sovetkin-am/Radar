@@ -7,12 +7,31 @@
     font-size: 15px;
     margin-bottom: 10px;
     user-select: none;
+
+    &_flex-column {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
-  &__checkbox-label {
+  &__sub-label {
+    margin-bottom: 15px;
+  }
+
+  &__sub-label-content {
+    font-weight: bold;
+    color: #006fba;
+  }
+
+  &__radio-label {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__checkbox-label {
     cursor: pointer;
     user-select: none;
   }
@@ -33,4 +52,8 @@
       outline: 3px solid rgba(37, 133, 245, 0.5);
     }
   }
+}
+
+.MuiExpansionPanelSummary-root.Mui-focused {
+  background-color: rgba(0, 111, 186, 0.15) !important;
 }

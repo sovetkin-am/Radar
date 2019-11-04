@@ -13,6 +13,13 @@
     justify-content: flex-start;
   }
 
+  &__list-item {
+    &_active .app-menu__link {
+      color: #006fba;
+      font-weight: bold;
+    }
+  }
+
   &__logo {
     padding-left: 60px;
     padding-right: 25px;
@@ -27,11 +34,11 @@
     padding: 20px 15px 15px 15px;
 
     &:focus {
-      outline: 3px solid rgba(37, 133, 245, .5);
+      outline: 3px solid rgba(37, 133, 245, 0.5);
     }
   }
 
   &__link:hover {
-    color: #2585f5;
+    color: #006fba;
   }
 }

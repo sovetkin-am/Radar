@@ -3,17 +3,48 @@ import React from 'react';
 const Matrix = props => {
   return (
     <div>
-      <svg version="1.1"
-           xmlns="http://www.w3.org/2000/svg"
-           className="radar__wrapper"
-           viewBox="0 0 750 770"
-           id="chart">
-        <line x1="40" y1="40" x2="40" y2="740" stroke="black"/>
-        <line x1="40" y1="740" x2="740" y2="740" stroke="black"/>
-        <polyline points="30,55 40,40 50,55" stroke="black" fill="none"/>
-        <polyline points="725,730 740,740 725,750" stroke="black" fill="none"/>
-        <line x1="40" y1="390" x2="740" y2="390" stroke="grey" strokeDasharray="7" strokeWidth="3"/>
-        <line x1="380" y1="740" x2="380" y2="40" stroke="grey" strokeDasharray="7" strokeWidth="3"/>
+      <svg
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        className="radar__wrapper"
+        viewBox="0 0 800 800"
+        id="chart"
+      >
+        <line x1="40" y1="40" x2="40" y2="740" stroke="black" />
+        <line x1="40" y1="740" x2="740" y2="740" stroke="black" />
+        <polyline points="30,55 40,40 50,55" stroke="black" fill="none" />
+        <polyline points="725,730 740,740 725,750" stroke="black" fill="none" />
+        <line
+          x1="40"
+          y1="410"
+          x2="780"
+          y2="410"
+          stroke="grey"
+          strokeDasharray="7"
+          strokeWidth="3"
+        />
+        <line
+          x1="380"
+          y1="740"
+          x2="380"
+          y2="40"
+          stroke="grey"
+          strokeDasharray="7"
+          strokeWidth="3"
+        />
+        <text
+          x="-470"
+          y="11"
+          fontSize="12"
+          fill="#006FBA"
+          fontWeight="bold"
+          transform="rotate(-90)"
+        >
+          Рыночная зрелость
+        </text>
+        <text x="290" y="790" fontSize="12" fill="#006FBA" fontWeight="bold">
+          Организационная готовность
+        </text>
         <text x="100" y="150" fontSize="12" fill="#006FBA" fontWeight="bold">
           "Венчур"
         </text>
@@ -41,7 +72,14 @@ const Matrix = props => {
         <text x="550" y="640" fontSize="12" fill="#006FBA" fontWeight="bold">
           Стратегия: монетизировать
         </text>
-        <text x="120" y="765" fontSize="12" fill="#006FBA" fontWeight="bold" letterSpacing="93">
+        <text
+          x="120"
+          y="765"
+          fontSize="12"
+          fill="#006FBA"
+          fontWeight="bold"
+          letterSpacing="93"
+        >
           1234567
         </text>
         <text x="20" y="765" fontSize="12" fill="#006FBA" fontWeight="bold">
@@ -65,7 +103,7 @@ const Matrix = props => {
         {props.children}
       </svg>
     </div>
-  )
+  );
 };
 
 export default Matrix;

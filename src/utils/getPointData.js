@@ -98,7 +98,10 @@ function getPosition(degree, giphotenuse, marketState, readyState) {
   const rLeft = lSin * giphotenuse + 350;
 
   const mTop = 140 * (6 - marketState) - 80 + Math.random() * 50;
-  const mLeft = 100 * readyState + 25 + Math.random() * 50;
+  let mLeft = 100 * readyState + 25 + Math.random() * 50;
+  if (readyState < 7) {
+    mLeft += Math.random() * 50;
+  }
 
   return {
     rTop,

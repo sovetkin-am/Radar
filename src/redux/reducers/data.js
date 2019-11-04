@@ -34,7 +34,11 @@ export default function(state = initialState, action) {
     }
 
     case DATA_REMOVE:
-      return initialState;
+      return {
+        ...state,
+        data: [],
+        filteredData: [],
+      };
 
     case DATA_FILTER_SET: {
       const filter = {

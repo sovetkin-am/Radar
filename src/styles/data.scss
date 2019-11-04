@@ -6,10 +6,15 @@
   &__label {
     font-size: 15px;
     margin-bottom: 10px;
+    user-select: none;
   }
 
   &__checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
     cursor: pointer;
+    user-select: none;
   }
 
   &__range {
@@ -25,7 +30,7 @@
     height: 0;
 
     &:focus ~ label {
-      outline: 3px solid rgba(37, 133, 245, .5);
+      outline: 3px solid rgba(37, 133, 245, 0.5);
     }
   }
 }
